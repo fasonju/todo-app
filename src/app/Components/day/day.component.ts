@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Task } from 'src/app/Models/Task';
 
 @Component({
   selector: 'app-day',
@@ -6,6 +7,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./day.component.css']
 })
 export class DayComponent {
+
   @Input() day: Date = new Date();
-  @Input() Tasks: string[] = [];
+  tasks: Task[] = [];
 }
