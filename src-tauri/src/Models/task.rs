@@ -1,16 +1,20 @@
-use chrono::naive::NaiveDate;
+/// SQLITE cannot store dates so we store as iso string
+use crate::diesel::{Insertable, Queryable};
+use crate::schema::tasks;
 
+#[derive(Queryable)]
 pub struct Task {
     id: i32,
-    name: string,
-    due_date: NaiveDate,
+    name: String,
+    due_date: String,
     completed: bool,
-    text: string,
+    text: String,
 }
-
+#[derive(Insertable)]
+#[table_name = "tasks"]
 pub struct TaskInsert {
-    name: string,
-    due_date: NaiveDate,
+    name: String,
+    dueDate: String,
     completed: bool,
-    text: string,
+    text: String,
 }

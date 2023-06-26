@@ -1,8 +1,9 @@
--- Your SQL goes here
-CREATE TABLE tasks (
-    id INTEGER PRIMARY KEY Not NULL,
-    name TEXT Not NULL,
-    dueDate TEXT Not NULL,
-    completed BOOLEAN Not NULL,
-    text TEXT Not NULL
+create table tasks
+(
+    id        INTEGER default 1 not null
+        primary key autoincrement,
+    name      TEXT              not null,
+    dueDate   TEXT              not null,
+    completed BOOLEAN           not null,
+    text      TEXT              not null
 );
