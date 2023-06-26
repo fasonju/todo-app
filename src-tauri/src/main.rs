@@ -7,6 +7,7 @@ extern crate diesel;
 mod db;
 mod queries;
 mod Models {
+    pub mod result;
     pub mod task;
 }
 mod schema;

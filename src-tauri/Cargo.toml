@@ -18,6 +18,9 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 chrono = "0.4.26"
 diesel = { version = "2.1.0", features = ["sqlite"] }
+# these crates are for custom results
+thiserror = "1.0.40"
+anyhow = "1.0.71"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
