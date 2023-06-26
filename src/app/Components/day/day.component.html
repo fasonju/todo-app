@@ -1,5 +1,5 @@
-<button class="bg-blue-500 text-white" (click)="testQueryGet()">test query</button>
-<button class="bg-red-500 text-white" (click)="testQueryInsert()">test query</button>
+<button class="bg-blue-500 text-white" (click)="testQueryGet()">test get query</button>
+<button class="bg-red-500 text-white" (click)="testQueryInsert()">test put query</button>
 <ul>
     <li *ngFor="let task of tasks">
         {{task.id}} - {{task.name}} - {{task.dueDate}} - {{task.completed}} 

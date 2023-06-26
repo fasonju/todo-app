@@ -26,16 +26,21 @@ export class DayComponent {
       completed: false,
       text: "test"
     };
-    this.tasksService.saveTask(insertTask).subscribe(task => {
-      console.log(task);
-      this.tasks.push(task)
+
+    this.tasksService.saveTask(insertTask).then(task => {
+      this.tasks.push(task);
+    })
+    .catch(err => {
+      alert(err);
     });
   }
 
   testQueryGet() {
-    this.tasksService.getTasksForDay("2021-01-01").subscribe(tasks => {
-      console.log(tasks);
+    this.tasksService.getTasksForDay("2021-01-01").then(tasks => {
       this.tasks = tasks;
+    })
+    .catch(err => {
+      alert(err);
     });
   }
 }
