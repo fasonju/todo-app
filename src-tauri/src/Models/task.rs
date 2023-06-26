@@ -7,3 +7,10 @@ pub struct Task {
     completed: bool,
     text: string,
 }
+
+pub struct TaskInsert {
+    name: string,
+    due_date: NaiveDate,
+    completed: bool,
+    text: string,
+}
