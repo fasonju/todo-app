@@ -5,9 +5,13 @@ use crate::schema::tasks;
 use crate::models::result::{TauriError, TauriResult};
 use crate::models::task::{InsertTask, Task};
 
-/// * `iso_date` - The date to get tasks for in ISO format YYYY-MM-DDTHH:MM:SSZ
-pub fn get_tasks_for_day(iso_date: String) -> Result<Vec<Task>, ()> {
-    let conn = establish_connection();
+/// * `iso_date` - The date to get tasks for in ISO format YYYY-MM-DD
+pub fn get_tasks_for_day(iso_date: String) -> TauriResult<Vec<Task>> {
+    let conn = &mut establish_connection();
+    if iso_date.len() != 10 {
+        return Err(TauriError::InvalidParameterError);
+    }
+    
     todo!("Implement get_tasks_for_day")
 }
 
