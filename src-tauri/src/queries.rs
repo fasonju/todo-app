@@ -1,18 +1,24 @@
 use crate::db::establish_connection;
 use crate::diesel;
 use crate::diesel::{ExpressionMethods, QueryDsl, RunQueryDsl};
-use crate::schema::tasks;
 use crate::models::result::{TauriError, TauriResult};
 use crate::models::task::{InsertTask, Task};
+use crate::schema::tasks;
 
 /// * `iso_date` - The date to get tasks for in ISO format YYYY-MM-DD
-pub fn get_tasks_for_day(iso_date: String) -> TauriResult<Vec<Task>> {
+#[tauri::command]
+pub fn get_tasks_for_day(isoDate: String) -> TauriResult<Vec<Task>> {
     let conn = &mut establish_connection();
-    if iso_date.len() != 10 {
-        return Err(TauriError::InvalidParameterError);
+    if isoDate.len() != 10 || chrono::NaiveDate::parse_from_str(&isoDate, "%Y-%m-%d").is_err() {
+        return Err(TauriError::InvalidParameterError {
+            expected: ("YYYY-MM-DD"),
+            got: (isoDate),
+        });
     }
-    
-    todo!("Implement get_tasks_for_day")
+    tasks::table
+        .filter(tasks::dueDate.eq(isoDate))
+        .load(conn)
+        .map_err(TauriError::from)
 }
 
 /// * `task` - The task to save
@@ -26,5 +32,8 @@ pub fn save_task(task: InsertTask) -> TauriResult<Task> {
         .execute(conn)
         .map_err(TauriError::from)?;
 
-    Ok(tasks::table.order(tasks::id.desc()).first(conn)?)
+    tasks::table
+        .order(tasks::id.desc())
+        .first(conn)
+        .map_err(TauriError::from)
 }

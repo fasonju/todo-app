@@ -6,8 +6,8 @@ use thiserror;
 pub enum TauriError {
     #[error(transparent)]
     SqliteError(#[from] diesel::result::Error),
-    #[error("invalid parameter")]
-    InvalidParameterError,
+    #[error("invalid parameter, expected : {expected} got {got}")]
+    InvalidParameterError { expected: &'static str, got: String },
 }
 
 impl Serialize for TauriError {

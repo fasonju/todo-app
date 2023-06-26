@@ -19,7 +19,7 @@ export class DayComponent {
   //@Input() day: string = new Date().toISOString().slice(0, 10);
   tasks: Task[] = [];
 
-  testQuery() {
+  testQueryInsert() {
     let insertTask = {
       name: "test",
       dueDate: "2021-01-01",
@@ -29,6 +29,13 @@ export class DayComponent {
     this.tasksService.saveTask(insertTask).subscribe(task => {
       console.log(task);
       this.tasks.push(task)
+    });
+  }
+
+  testQueryGet() {
+    this.tasksService.getTasksForDay("2021-01-01").subscribe(tasks => {
+      console.log(tasks);
+      this.tasks = tasks;
     });
   }
 }

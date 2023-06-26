@@ -13,10 +13,10 @@ export class TasksService {
    * @param day day in iso string format
    */
   getTasksForDay(date : string) : Observable<Task[]> {
-    return from(invoke<Task[]>('get_tasks_for_day', {day: date}));
+    return from(invoke<Task[]>('get_tasks_for_day', {isoDate: date}));
   }
 
-  
+
   saveTask(task : InsertTask) : Observable<Task> {
     return from(invoke<Task>('save_task', {task: task}));
   }
