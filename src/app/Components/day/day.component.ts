@@ -18,4 +18,17 @@ export class DayComponent {
 
   //@Input() day: string = new Date().toISOString().slice(0, 10);
   tasks: Task[] = [];
+
+  testQuery() {
+    let insertTask = {
+      name: "test",
+      dueDate: "2021-01-01",
+      completed: false,
+      text: "test"
+    };
+    this.tasksService.saveTask(insertTask).subscribe(task => {
+      console.log(task);
+      this.tasks.push(task)
+    });
+  }
 }

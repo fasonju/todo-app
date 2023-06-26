@@ -16,8 +16,9 @@ export class TasksService {
     return from(invoke<Task[]>('get_tasks_for_day', {day: date}));
   }
 
+  
   saveTask(task : InsertTask) : Observable<Task> {
-    return from(invoke<Task>('save_task', task));
+    return from(invoke<Task>('save_task', {task: task}));
   }
 
   constructor() { }
