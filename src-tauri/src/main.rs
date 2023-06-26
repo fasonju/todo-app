@@ -6,7 +6,7 @@ extern crate diesel;
 
 mod db;
 mod queries;
-mod Models {
+mod models {
     pub mod result;
     pub mod task;
 }

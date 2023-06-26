@@ -2,8 +2,8 @@ use crate::db::establish_connection;
 use crate::diesel;
 use crate::diesel::{ExpressionMethods, QueryDsl, RunQueryDsl};
 use crate::schema::tasks;
-use crate::Models::result::{TauriError, TauriResult};
-use crate::Models::task::{InsertTask, Task};
+use crate::models::result::{TauriError, TauriResult};
+use crate::models::task::{InsertTask, Task};
 
 /// * `iso_date` - The date to get tasks for in ISO format YYYY-MM-DDTHH:MM:SSZ
 pub fn get_tasks_for_day(iso_date: String) -> Result<Vec<Task>, ()> {
