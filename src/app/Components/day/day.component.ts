@@ -12,11 +12,16 @@ export class DayComponent {
   constructor(private tasksService : TasksService) { }
 
   ngOnInit(): void {
-    //this.tasksService.getTasksForDay(this.day).subscribe(tasks => this.tasks = tasks);
+    this.tasksService.getTasksForDay(this.day).then(tasks => {
+      this.tasks = tasks;
+    })
+    .catch(err => {
+      alert(err);
+    });
   }
 
 
-  //@Input() day: string = new Date().toISOString().slice(0, 10);
+  @Input() day: string = new Date().toISOString().slice(0, 10);
   tasks: Task[] = [];
 
   testQueryInsert() {

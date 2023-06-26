@@ -9,7 +9,7 @@ use crate::schema::tasks;
 #[tauri::command]
 pub fn get_tasks_for_day(isoDate: String) -> TauriResult<Vec<Task>> {
     let conn = &mut establish_connection();
-    if isoDate.len() != 10 || chrono::NaiveDate::parse_from_str(&isoDate, "%Y-%m-%d").is_err() {
+    if !valid_date(&isoDate) {
         return Err(TauriError::InvalidParameterError {
             expected: ("YYYY-MM-DD"),
             got: (isoDate),
@@ -27,6 +27,13 @@ pub fn get_tasks_for_day(isoDate: String) -> TauriResult<Vec<Task>> {
 pub fn save_task(task: InsertTask) -> TauriResult<Task> {
     let conn = &mut establish_connection();
 
+    if !valid_date(&task.dueDate) {
+        return Err(TauriError::InvalidParameterError {
+            expected: ("YYYY-MM-DD"),
+            got: (task.dueDate),
+        });
+    }
+
     diesel::insert_into(tasks::table)
         .values(&task)
         .execute(conn)
@@ -36,4 +43,8 @@ pub fn save_task(task: InsertTask) -> TauriResult<Task> {
         .order(tasks::id.desc())
         .first(conn)
         .map_err(TauriError::from)
+}
+
+fn valid_date(date: &str) -> bool {
+    chrono::NaiveDate::parse_from_str(date, "%Y-%m-%d").is_ok()
 }
