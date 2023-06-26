@@ -1,8 +1,10 @@
+use serde::{Deserialize, Serialize};
+
 /// SQLITE cannot store dates so we store as iso string
 use crate::diesel::{Insertable, Queryable};
 use crate::schema::tasks;
 
-#[derive(Queryable)]
+#[derive(Queryable, Serialize, Deserialize)]
 pub struct Task {
     id: i32,
     name: String,
@@ -10,9 +12,9 @@ pub struct Task {
     completed: bool,
     text: String,
 }
-#[derive(Insertable)]
+#[derive(Insertable, Serialize, Deserialize)]
 #[table_name = "tasks"]
-pub struct TaskInsert {
+pub struct InsertTask {
     name: String,
     dueDate: String,
     completed: bool,

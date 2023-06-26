@@ -1,8 +1,15 @@
 /// Sqlite cannot store dates so we use a string for dueDate and convert it to a date when we need it
-export interface Task {
+export type Task = {
     id: number;
     name: string;
-    dueDate: String;
+    dueDate: string;
+    completed: boolean;
+    text: string;
+}
+
+export type InsertTask = {
+    name: string;
+    dueDate: string;
     completed: boolean;
     text: string;
 }

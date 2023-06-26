@@ -11,9 +11,11 @@ mod Models {
 }
 mod schema;
 
+use queries::*;
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![])
+        .invoke_handler(tauri::generate_handler![save_task])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
