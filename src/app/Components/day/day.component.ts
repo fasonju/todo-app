@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Task } from 'src/app/Models/Task';
+import { InsertTask, Task } from 'src/app/Models/Task';
 import { TasksService } from 'src/app/tasks.service';
 
 @Component({
@@ -8,8 +8,9 @@ import { TasksService } from 'src/app/tasks.service';
   styleUrls: ['./day.component.css']
 })
 export class DayComponent {
-
   constructor(private tasksService : TasksService) { }
+  @Input() day: string = new Date().toISOString().slice(0, 10);
+  tasks: Task[] = [];
 
   ngOnInit(): void {
     this.tasksService.getTasksForDay(this.day).then(tasks => {
@@ -20,19 +21,8 @@ export class DayComponent {
     });
   }
 
-
-  @Input() day: string = new Date().toISOString().slice(0, 10);
-  tasks: Task[] = [];
-
-  testQueryInsert() {
-    let insertTask = {
-      name: "test",
-      dueDate: "2021-01-01",
-      completed: false,
-      text: "test"
-    };
-
-    this.tasksService.saveTask(insertTask).then(task => {
+  saveTask(task: Task): void {
+    this.tasksService.saveTask(task).then(() => {
       this.tasks.push(task);
     })
     .catch(err => {
@@ -40,12 +30,7 @@ export class DayComponent {
     });
   }
 
-  testQueryGet() {
-    this.tasksService.getTasksForDay("2021-01-01").then(tasks => {
-      this.tasks = tasks;
-    })
-    .catch(err => {
-      alert(err);
-    });
+  addTask(): void {
+    
   }
 }
