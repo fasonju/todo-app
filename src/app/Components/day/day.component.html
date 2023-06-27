@@ -1,10 +1,8 @@
+{{day}}
 
-<ul>
+<ul class ="flex-wrap">
     <li 
-    *ngFor="let task of tasks; let i = index" 
-    [ngStyle]="i % 2 === 0 ? {'background-color': 'white'} : {'background-color': 'black'}">
-        {{task.id}} - {{task.name}} - {{task.dueDate}} - {{task.completed}}  - {{task.text}}
+    *ngFor="let task of tasks; let i = index" >
+        <app-task [task]="task"></app-task>
     </li>
 </ul>
-
-<button addTask()>Add new task</button>
