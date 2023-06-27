@@ -7,6 +7,7 @@ use crate::schema::tasks;
 
 /// * `iso_date` - The date to get tasks for in ISO format YYYY-MM-DD
 #[tauri::command]
+#[allow(non_snake_case)]
 pub fn get_tasks_for_day(isoDate: String) -> TauriResult<Vec<Task>> {
     let conn = &mut establish_connection();
     if !valid_date(&isoDate) {

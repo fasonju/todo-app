@@ -13,7 +13,7 @@ pub struct Task {
     text: String,
 }
 #[derive(Insertable, Serialize, Deserialize)]
-#[table_name = "tasks"]
+#[diesel(table_name = tasks)]
 #[allow(non_snake_case)]
 pub struct InsertTask {
     name: String,
