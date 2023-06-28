@@ -75,5 +75,25 @@ export class DatePickerComponent implements OnInit {
     this.no_of_days = daysArray;
   }
 
+  modifyMonth(change : number) {
+    if (Math.abs(change) != 1) {
+      console.error("Invalid month change");
+      return;
+    }
+
+    let newMonth = this.month + change;
+
+    if (newMonth > 11) {
+      this.year += 1;
+      this.month = 0;
+    } else if (newMonth < 0) {
+      this.year -= 1;
+      this.month = 11;
+    } else {
+      this.month = newMonth;
+    }
+    
+  }
+
   trackByIdentity = (index: number, item: any) => item;
 }

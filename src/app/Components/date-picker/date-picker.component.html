@@ -1,6 +1,6 @@
 <div class="antialiased sans-serif">
   <div class="container mx-auto px-4 py-2 md:py-10">
-    <div class=" w-64">
+    <div class="w-64">
       <label for="datepicker" class="font-bold mb-1 text-gray-700 block">Select Date</label>
       <div class="relative">
         <input type="hidden" name="date" x-ref="date" />
@@ -38,9 +38,6 @@
           </svg>
         </div>
 
-        <!-- <div {{no_of_days.length"></div>
-                        <div {{32 - new Date(year, month, 32).getDate()"></div>
-                        <div {{new Date(year, month).getDay()"></div> -->
         <div
           class="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
           style="width: 17rem"
@@ -65,10 +62,7 @@
                   p-1
                   rounded-full
                 "
-                [ngClass]="{ 'cursor-not-allowed opacity-25': month === 0 }"
-                [disabled]="month === 0 ? true : false"
-                (click)="month = month - 1"
-                (click)="getNoOfDays()"
+                (click)="modifyMonth(-1)"
               >
                 <svg
                   class="h-6 w-6 text-gray-500 inline-flex"
@@ -91,9 +85,7 @@
                   p-1
                   rounded-full
                 "
-                [ngClass]="{ 'cursor-not-allowed opacity-25': month === 11 }"
-                [disabled]="month === 11 ? true : false"
-                (click)="month = month + 1"
+                (click)="modifyMonth(1)"
                 (click)="getNoOfDays()"
               >
                 <svg
@@ -103,6 +95,64 @@
                   stroke="currentColor"
                 >
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="
+                  transition
+                  ease-in-out
+                  duration-100
+                  inline-flex
+                  cursor-pointer
+                  hover:bg-gray-200
+                  p-1
+                  rounded-full
+                "
+                (click)="year = year - 1"
+                (click)="getNoOfDays()"
+              >
+                <svg
+                  class="h-6 w-6 text-gray-500 inline-flex"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="
+                  transition
+                  ease-in-out
+                  duration-100
+                  inline-flex
+                  cursor-pointer
+                  hover:bg-gray-200
+                  p-1
+                  rounded-full
+                "
+                (click)="year = year + 1"
+                (click)="getNoOfDays()"
+              >
+                <svg
+                  class="h-6 w-6 text-gray-500 inline-flex"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 10l7-7m0 0l7 7m-7-7v18"
+                  />
                 </svg>
               </button>
             </div>
