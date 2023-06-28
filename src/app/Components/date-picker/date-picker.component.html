@@ -1,13 +1,13 @@
 <div class="antialiased sans-serif">
   <div class="container mx-auto px-4 py-2 md:py-10">
-    <div class="w-64">
+    <div class="w-80">
       <label for="datepicker" class="font-bold mb-1 text-gray-700 block">Select Date</label>
       <div class="relative">
         <input type="hidden" name="date" x-ref="date" />
         <input
           type="text"
           readonly
-          [(ngModel)]="datepickerValue"
+          [(ngModel)]="datepickerValue" 
           (click)="showDatepicker = !showDatepicker"
           (keydown.escape)="showDatepicker = false"
           class="
@@ -39,8 +39,7 @@
         </div>
 
         <div
-          class="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
-          style="width: 17rem"
+          class="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0 w-80"
           [hidden]="!showDatepicker"
           (keydown.away)="showDatepicker = false"
         >
@@ -63,6 +62,7 @@
                   rounded-full
                 "
                 (click)="modifyMonth(-1)"
+                (click)="getNoOfDays()"
               >
                 <svg
                   class="h-6 w-6 text-gray-500 inline-flex"
@@ -109,7 +109,7 @@
                   p-1
                   rounded-full
                 "
-                (click)="year = year - 1"
+                (click)="modifyYear(-1)"
                 (click)="getNoOfDays()"
               >
                 <svg
@@ -138,7 +138,7 @@
                   p-1
                   rounded-full
                 "
-                (click)="year = year + 1"
+                (click)="modifyYear(1)"
                 (click)="getNoOfDays()"
               >
                 <svg

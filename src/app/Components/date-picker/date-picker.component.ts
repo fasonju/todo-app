@@ -56,6 +56,9 @@ export class DatePickerComponent implements OnInit {
     this.showDatepicker = false;
   }
 
+  /**
+   * On change of either year or month, call this function to make the days line up.
+   */
   getNoOfDays() {
     const daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
 
@@ -76,6 +79,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   modifyMonth(change : number) {
+    //TODO implement dropdown month change
     if (Math.abs(change) != 1) {
       console.error("Invalid month change");
       return;
@@ -92,7 +96,11 @@ export class DatePickerComponent implements OnInit {
     } else {
       this.month = newMonth;
     }
-    
+  }
+
+  modifyYear(change : number) {
+    this.year += change;
+    this.getNoOfDays();
   }
 
   trackByIdentity = (index: number, item: any) => item;
