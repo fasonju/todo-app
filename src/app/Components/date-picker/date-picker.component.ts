@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-date-picker',
@@ -25,6 +25,7 @@ export class DatePickerComponent implements OnInit {
   days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   showDatepicker = false;
   datepickerValue!: string;
+  @Output() dateChangeEvent = new EventEmitter<string>();
   month!: number; // !: mean promis it will not be null, and it will definitely be assigned
   year!: number;
   no_of_days = [] as number[];
@@ -53,6 +54,7 @@ export class DatePickerComponent implements OnInit {
   getDateValue(date: any) {
     let selectedDate = new Date(this.year, this.month, date);
     this.datepickerValue = selectedDate.toDateString();
+    this.dateChangeEvent.emit(selectedDate.toISOString().slice(0, 10));
     this.showDatepicker = false;
   }
 
