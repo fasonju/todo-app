@@ -9,11 +9,11 @@ import { TasksService } from 'src/app/tasks.service';
 })
 export class DayComponent {
   constructor(private tasksService : TasksService) { }
-  @Input() day: string = new Date().toISOString().slice(0, 10);
+  date: string = new Date().toISOString().slice(0, 10);
   tasks: Task[] = [];
 
   ngOnInit(): void {
-    this.tasksService.getTasksForDay(this.day).then(tasks => {
+    this.tasksService.getTasksForDay(this.date).then(tasks => {
       this.tasks = tasks;
     })
     .catch(err => {
@@ -21,8 +21,8 @@ export class DayComponent {
     });
   }
 
-  saveTask(task: Task): void {
-    this.tasksService.saveTask(task).then(() => {
+  saveTask(insert_task: InsertTask): void {
+    this.tasksService.saveTask(insert_task).then((task) => {
       this.tasks.push(task);
     })
     .catch(err => {
@@ -30,7 +30,7 @@ export class DayComponent {
     });
   }
 
-  addTask(): void {
-    
+  onDateChange(date: string): void {
+    this.date = date;
   }
 }

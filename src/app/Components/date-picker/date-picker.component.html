@@ -168,10 +168,10 @@
         <ng-container *ngFor="let blankday of blankdays">
           <div style="width: 14.28%" class="text-center border-none p-1 border-transparent text-sm"></div>
         </ng-container>
-        <ng-container *ngFor="let date of no_of_days; let dateIndex = index; trackBy: trackByIdentity">
+        <ng-container *ngFor="let day of no_of_days; let dateIndex = index; trackBy: trackByIdentity">
           <div style="width: 14.28%" class="px-1 mb-1">
             <div
-              (click)="getDateValue(date)"
+              (click)="getDateValue(day)"
               class="
                 cursor-pointer
                 text-center text-sm
@@ -182,11 +182,11 @@
                 duration-100
               "
               [ngClass]="{
-                'bg-blue-500 text-white': isToday(date) === true,
-                'text-gray-700 hover:bg-blue-200': isToday(date) === false
+                'bg-blue-500 text-white': isToday(day) === true,
+                'text-gray-700 hover:bg-blue-200': isToday(day) === false
               }"
             >
-              {{ date }}
+              {{ day }}
             </div>
           </div>
         </ng-container>

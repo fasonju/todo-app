@@ -6,7 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./date-picker.component.css']
 })
 
-export class DatePickerComponent implements OnInit {
+export class DatePickerComponent {
   MONTH_NAMES = [
     'January',
     'February',
@@ -23,6 +23,7 @@ export class DatePickerComponent implements OnInit {
   ];
   DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  MIDDAY = 12; //necessary because iso string conversion could fuck up the dates otherwise.
   showDatepicker = false;
   datepickerValue!: string;
   @Output() dateChangeEvent = new EventEmitter<string>();
@@ -31,18 +32,18 @@ export class DatePickerComponent implements OnInit {
   no_of_days = [] as number[];
   blankdays = [] as number[];
 
-  constructor() {}
-
-  ngOnInit(): void {
+  constructor() {
     this.initDate();
     this.getNoOfDays();
   }
+
 
   initDate() {
     let today = new Date();
     this.month = today.getMonth();
     this.year = today.getFullYear();
-    this.datepickerValue = new Date(this.year, this.month, today.getDate()).toDateString();
+    this.datepickerValue = new Date(this.year, this.month, today.getDate(), this.MIDDAY).toDateString();
+    this.dateChangeEvent.emit(today.toISOString().slice(0, 10));
   }
 
   isToday(date: any) {
@@ -52,7 +53,8 @@ export class DatePickerComponent implements OnInit {
   }
 
   getDateValue(date: any) {
-    let selectedDate = new Date(this.year, this.month, date);
+    let selectedDate = new Date(this.year, this.month, date, this.MIDDAY); 
+    console.log(selectedDate.toISOString());
     this.datepickerValue = selectedDate.toDateString();
     this.dateChangeEvent.emit(selectedDate.toISOString().slice(0, 10));
     this.showDatepicker = false;
@@ -67,12 +69,12 @@ export class DatePickerComponent implements OnInit {
     // find where to start calendar day of week
     let dayOfWeek = new Date(this.year, this.month).getDay();
     let blankdaysArray = [];
-    for (var i = 1; i <= dayOfWeek; i++) {
+    for (let i = 1; i <= dayOfWeek; i++) {
       blankdaysArray.push(i);
     }
 
     let daysArray = [];
-    for (var i = 1; i <= daysInMonth; i++) {
+    for (let i = 1; i <= daysInMonth; i++) {
       daysArray.push(i);
     }
 
