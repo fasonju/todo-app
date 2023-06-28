@@ -1,8 +1,7 @@
 <app-date-picker (dateChangeEvent)="onDateChange($event)"></app-date-picker>
-{{date}}
 <ul class ="flex-wrap">
     <li 
-    *ngFor="let task of tasks; let i = index" >
+    *ngFor="let task of tasks;" >
         <app-task [task]="task"></app-task>
     </li>
-</ul>
+</ul>   

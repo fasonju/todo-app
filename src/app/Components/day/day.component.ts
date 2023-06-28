@@ -32,5 +32,8 @@ export class DayComponent {
 
   onDateChange(date: string): void {
     this.date = date;
+    this.tasksService.getTasksForDay(this.date).then(tasks => {
+      this.tasks = tasks;
+    });
   }
 }
