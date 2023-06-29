@@ -11,6 +11,7 @@ export class DayComponent {
   constructor(private tasksService : TasksService) { }
   date: string = new Date().toISOString().slice(0, 10);
   tasks: Task[] = [];
+  modalActive = false;
 
   ngOnInit(): void {
     this.tasksService.getTasksForDay(this.date).then(tasks => {
@@ -21,6 +22,10 @@ export class DayComponent {
     });
   }
 
+  /**
+   * 
+   * @param insert_task the values are not checked yet this is done on the back end
+   */
   saveTask(insert_task: InsertTask): void {
     this.tasksService.saveTask(insert_task).then((task) => {
       this.tasks.push(task);
@@ -28,6 +33,7 @@ export class DayComponent {
     .catch(err => {
       alert(err);
     });
+    this.modalActive = false;
   }
 
   onDateChange(date: string): void {

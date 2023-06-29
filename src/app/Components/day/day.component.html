@@ -1,12 +1,17 @@
-<app-date-picker (dateChangeEvent)="onDateChange($event)"></app-date-picker>
+<div class="flex justify-evenly">
+    <app-date-picker (dateChangeEvent)="onDateChange($event)" ></app-date-picker>
+    <button (click)="modalActive = true" class="px-4 py-2 bg-purple-500 text-white
+    text-base font-medium rounded-md w-80
+    shadow-sm hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-300"> create task </button>
+</div>
+
 <ul class ="flex-wrap">
-    <li 
+    <li     
     *ngFor="let task of tasks;" >
         <app-task [task]="task"></app-task>
     </li>
 </ul>   
-<div
-  class="fixed insert-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
-  id="modal">
-    <app-task-modal></app-task-modal>
-</div>
+<!-- applies blur to background of modal-->
+<div *ngIf="modalActive" class="fixed top-0 left-0 w-full h-full opacity-50 bg-slate-500"></div>
+<app-task-modal *ngIf="modalActive" (oncreateTask)="saveTask($event)" (oncancelCreation)="modalActive=$event" class="insert-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" ></app-task-modal>
+
