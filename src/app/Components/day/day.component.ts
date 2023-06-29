@@ -28,7 +28,9 @@ export class DayComponent {
    */
   saveTask(insert_task: InsertTask): void {
     this.tasksService.saveTask(insert_task).then((task) => {
-      this.tasks.push(task);
+      if (task.dueDate == this.date) {
+        this.tasks.push(task);
+      } 
     })
     .catch(err => {
       alert(err);
