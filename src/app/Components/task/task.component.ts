@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from 'src/app/Models/Task';
 
 @Component({
@@ -8,4 +8,9 @@ import { Task } from 'src/app/Models/Task';
 })
 export class TaskComponent {
   @Input() task!: Task;
+  @Output() onEditTask = new EventEmitter<void>();
+
+  editTask(): void {
+    this.onEditTask.emit();
+  }
 }

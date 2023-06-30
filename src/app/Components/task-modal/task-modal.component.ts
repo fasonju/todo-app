@@ -22,7 +22,7 @@ export class TaskModalComponent {
   }
 
   @Output() oncreateTask : EventEmitter<InsertTask> = new EventEmitter();
-  @Output() oncancelCreation : EventEmitter<boolean> = new EventEmitter();
+  @Output() oncancelCreation : EventEmitter<void> = new EventEmitter();
 
   createTask() {
     let newTask : InsertTask  = {
@@ -37,6 +37,6 @@ export class TaskModalComponent {
   }
 
   cancelCreation() {
-    this.oncancelCreation.emit(false);
+    this.oncancelCreation.emit();
   }
 }

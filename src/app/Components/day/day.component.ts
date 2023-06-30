@@ -11,7 +11,15 @@ export class DayComponent {
   constructor(private tasksService : TasksService) { }
   date: string = new Date().toISOString().slice(0, 10);
   tasks: Task[] = [];
-  modalActive = false;
+  creationModalActive = false;
+
+  openCreationModal(): void {
+    this.creationModalActive = true;
+  }
+
+  closeCreationModal(): void {
+    this.creationModalActive = false;
+  }
 
   ngOnInit(): void {
     this.tasksService.getTasksForDay(this.date).then(tasks => {
@@ -35,7 +43,7 @@ export class DayComponent {
     .catch(err => {
       alert(err);
     });
-    this.modalActive = false;
+    this.creationModalActive = false;
   }
 
   onDateChange(date: string): void {
@@ -43,5 +51,13 @@ export class DayComponent {
     this.tasksService.getTasksForDay(this.date).then(tasks => {
       this.tasks = tasks;
     });
+  }
+
+  editTask(task: Task): void {
+    //TODO spawn modal for changes to task
+  }
+
+  applyTaskChanges(task: Task): void {
+    // send message to backend to update task
   }
 }
