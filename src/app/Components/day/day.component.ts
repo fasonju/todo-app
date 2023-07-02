@@ -13,14 +13,6 @@ export class DayComponent {
   tasks: Task[] = [];
   creationModalActive = false;
 
-  openCreationModal(): void {
-    this.creationModalActive = true;
-  }
-
-  closeCreationModal(): void {
-    this.creationModalActive = false;
-  }
-
   ngOnInit(): void {
     this.tasksService.getTasksForDay(this.date).then(tasks => {
       this.tasks = tasks;
@@ -28,6 +20,14 @@ export class DayComponent {
     .catch(err => {
       alert(err);
     });
+  }
+  
+  openCreationModal(): void {
+    this.creationModalActive = true;
+  }
+
+  closeCreationModal(): void {
+    this.creationModalActive = false;
   }
 
   /**
@@ -46,6 +46,11 @@ export class DayComponent {
     this.creationModalActive = false;
   }
 
+  /**
+   * This function updates the tasks array to the tasks for the given date.
+   * 
+   * @param date the date to change to
+   */
   onDateChange(date: string): void {
     this.date = date;
     this.tasksService.getTasksForDay(this.date).then(tasks => {
