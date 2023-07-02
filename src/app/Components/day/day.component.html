@@ -13,5 +13,5 @@
 </ul>   
 <!-- applies blur to background of modal-->
 <div *ngIf="creationModalActive" class="fixed top-0 left-0 w-full h-full opacity-50 bg-slate-500"></div>
-<app-task-creation-modal *ngIf="creationModalActive" (oncreateTask)="saveTask($event)" (oncancelCreation)="closeCreationModal()" class="insert-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" ></app-task-creation-modal>
+<app-task-creation-modal *ngIf="creationModalActive" (createTask)="saveTask($event)" (cancelCreation)="closeCreationModal()" class="insert-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" ></app-task-creation-modal>
 

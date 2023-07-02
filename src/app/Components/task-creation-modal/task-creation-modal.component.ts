@@ -21,10 +21,10 @@ export class TaskCreationModalComponent {
     })
   }
 
-  @Output() oncreateTask : EventEmitter<InsertTask> = new EventEmitter();
-  @Output() oncancelCreation : EventEmitter<void> = new EventEmitter();
+  @Output() createTask : EventEmitter<InsertTask> = new EventEmitter();
+  @Output() cancelCreation : EventEmitter<void> = new EventEmitter();
 
-  createTask() {
+  onCreateTask() {
     let newTask : InsertTask  = {
       name: this.taskForm.value.name,
       dueDate: this.taskForm.value.dueDate,
@@ -32,11 +32,11 @@ export class TaskCreationModalComponent {
       text: this.taskForm.value.text
     }
 
-    this.oncreateTask.emit(newTask);
+    this.createTask.emit(newTask);
     this.taskForm.reset();
   }
 
-  cancelCreation() {
-    this.oncancelCreation.emit();
+  onCancelCreation() {
+    this.cancelCreation.emit();
   }
 }
