@@ -8,10 +8,10 @@ import { AppComponent } from "./app.component";
 import { DayComponent } from './Components/day/day.component';
 import { TaskComponent } from './Components/task/task.component';
 import { DatePickerComponent } from "./Components/date-picker/date-picker.component";
-import { TaskModalComponent } from './Components/task-modal/task-modal.component';
+import { TaskCreationModalComponent } from './Components/task-creation-modal/task-creation-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, DayComponent, TaskComponent, DatePickerComponent, TaskModalComponent],
+  declarations: [AppComponent, DayComponent, TaskComponent, DatePickerComponent, TaskCreationModalComponent],
   imports: [BrowserModule, FormsModule, CommonModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],

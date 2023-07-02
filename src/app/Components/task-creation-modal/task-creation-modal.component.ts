@@ -3,11 +3,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { InsertTask } from 'src/app/Models/Task';
 
 @Component({
-  selector: 'app-task-modal',
-  templateUrl: './task-modal.component.html',
-  styleUrls: ['./task-modal.component.css']
+  selector: 'app-task-creation-modal',
+  templateUrl: './task-creation-modal.component.html',
+  styleUrls: ['./task-creation-modal.component.css']
 })
-export class TaskModalComponent {
+export class TaskCreationModalComponent {
 
   taskForm : FormGroup = new FormGroup({
     name : new FormControl(''),
