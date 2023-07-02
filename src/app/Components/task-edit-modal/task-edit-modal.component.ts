@@ -18,4 +18,16 @@ export class TaskEditModalComponent {
     complete : new FormControl(this.task.completed),
     text : new FormControl(this.task.text)
   });
+
+  onUpdateTask() {
+    let updatedTask : Task  = {
+      id: this.task.id,
+      name: this.taskForm.value.name,
+      dueDate: this.taskForm.value.dueDate,
+      completed: this.taskForm.value.complete,
+      text: this.taskForm.value.text
+    }
+
+    this.editTask.emit(updatedTask);
+  }
 }
