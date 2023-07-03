@@ -1,43 +1,43 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { InsertTask } from 'src/app/Models/Task';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {InsertTask} from 'src/app/Models/Task';
 
 @Component({
-  selector: 'app-task-creation-modal',
-  templateUrl: './task-creation-modal.component.html',
-  styleUrls: ['./task-creation-modal.component.css']
+    selector: 'app-task-creation-modal',
+    templateUrl: './task-creation-modal.component.html',
+    styleUrls: ['./task-creation-modal.component.css']
 })
 export class TaskCreationModalComponent {
 
-  taskForm : FormGroup = new FormGroup({
-    name : new FormControl(''),
-    dueDate : new FormControl(''),
-    text : new FormControl('')
-  });
+    taskForm: FormGroup = new FormGroup({
+        name: new FormControl(''),
+        dueDate: new FormControl(''),
+        text: new FormControl('')
+    });
 
-  updateDueDate(date : string) {
-    this.taskForm.patchValue({
-      dueDate : date
-    })
-  }
-
-  @Output() createTask : EventEmitter<InsertTask> = new EventEmitter();
-  @Output() closeModal : EventEmitter<void> = new EventEmitter();
-
-  onCreateTask() {
-    let newTask : InsertTask  = {
-      name: this.taskForm.value.name,
-      dueDate: this.taskForm.value.dueDate,
-      completed: false,
-      text: this.taskForm.value.text
+    updateDueDate(date: string) {
+        this.taskForm.patchValue({
+            dueDate: date
+        })
     }
 
-    this.createTask.emit(newTask);
-    this.closeModal.emit();
-    this.taskForm.reset();
-  }
+    @Output() createTask: EventEmitter<InsertTask> = new EventEmitter();
+    @Output() closeModal: EventEmitter<void> = new EventEmitter();
 
-  onCloseModal() {
-    this.closeModal.emit();
-  }
+    onCreateTask() {
+        let newTask: InsertTask = {
+            name: this.taskForm.value.name,
+            dueDate: this.taskForm.value.dueDate,
+            completed: false,
+            text: this.taskForm.value.text
+        }
+
+        this.createTask.emit(newTask);
+        this.closeModal.emit();
+        this.taskForm.reset();
+    }
+
+    onCloseModal() {
+        this.closeModal.emit();
+    }
 }

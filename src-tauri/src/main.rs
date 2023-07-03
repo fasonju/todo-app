@@ -5,10 +5,12 @@ extern crate diesel;
 
 mod db;
 mod queries;
+
 mod models {
     pub mod result;
     pub mod task;
 }
+
 mod schema;
 
 use queries::*;

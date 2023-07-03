@@ -12,6 +12,7 @@ pub struct Task {
     completed: bool,
     text: String,
 }
+
 #[derive(Insertable, Serialize, Deserialize)]
 #[diesel(table_name = tasks)]
 #[allow(non_snake_case)]

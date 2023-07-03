@@ -1,17 +1,19 @@
 <div class="flex justify-evenly">
-    <app-date-picker (dateChangeEvent)="onDateChange($event)" ></app-date-picker>
+    <app-date-picker (dateChangeEvent)="onDateChange($event)"></app-date-picker>
     <button (click)="openCreationModal()" class="px-4 py-2 bg-purple-500 text-white
     text-base font-medium rounded-md w-80
-    shadow-sm hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-300"> create task </button>
+    shadow-sm hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-300"> create task
+    </button>
 </div>
 
-<ul class ="flex-wrap">
-    <li     
-    *ngFor="let task of tasks;" >
+<ul class="flex-wrap">
+    <li
+            *ngFor="let task of tasks;">
         <app-task [task]="task" (onEditTask)="editTask(task)"></app-task>
     </li>
-</ul>   
+</ul>
 <!-- applies blur to background of modal-->
 <div *ngIf="creationModalActive" class="fixed top-0 left-0 w-full h-full opacity-50 bg-slate-500"></div>
-<app-task-creation-modal *ngIf="creationModalActive" (createTask)="saveTask($event)" (closeModal)="closeCreationModal()" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" ></app-task-creation-modal>
+<app-task-creation-modal *ngIf="creationModalActive" (createTask)="saveTask($event)" (closeModal)="closeCreationModal()"
+                         class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></app-task-creation-modal>
 
