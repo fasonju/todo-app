@@ -22,7 +22,7 @@ export class TaskCreationModalComponent {
   }
 
   @Output() createTask : EventEmitter<InsertTask> = new EventEmitter();
-  @Output() cancelCreation : EventEmitter<void> = new EventEmitter();
+  @Output() closeModal : EventEmitter<void> = new EventEmitter();
 
   onCreateTask() {
     let newTask : InsertTask  = {
@@ -33,10 +33,11 @@ export class TaskCreationModalComponent {
     }
 
     this.createTask.emit(newTask);
+    this.closeModal.emit();
     this.taskForm.reset();
   }
 
-  onCancelCreation() {
-    this.cancelCreation.emit();
+  onCloseModal() {
+    this.closeModal.emit();
   }
 }

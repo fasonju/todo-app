@@ -43,7 +43,6 @@ export class DayComponent {
     .catch(err => {
       alert(err);
     });
-    this.creationModalActive = false;
   }
 
   /**

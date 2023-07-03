@@ -10,6 +10,7 @@ import { Task } from 'src/app/Models/Task';
 export class TaskEditModalComponent {
   @Input() task!: Task;
   @Output() editTask : EventEmitter<Task> = new EventEmitter();
+  @Output() closeModal : EventEmitter<void> = new EventEmitter();
 
 
   taskForm : FormGroup = new FormGroup({
@@ -29,5 +30,10 @@ export class TaskEditModalComponent {
     }
 
     this.editTask.emit(updatedTask);
+    this.closeModal.emit();
+  }
+
+  oncloseModal() {
+    this.closeModal.emit();
   }
 }
