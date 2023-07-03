@@ -27,7 +27,7 @@ export class DatePickerComponent {
   showDatepicker = false;
   datepickerValue!: string;
   @Output() dateChangeEvent = new EventEmitter<string>();
-  month!: number; // !: mean promis it will not be null, and it will definitely be assigned
+  month!: number; // !: mean promise it will not be null, and it will definitely be assigned
   year!: number;
   no_of_days = [] as number[];
   blankdays = [] as number[];
@@ -49,7 +49,7 @@ export class DatePickerComponent {
   isToday(date: any) {
     const today = new Date();
     const d = new Date(this.year, this.month, date);
-    return today.toDateString() === d.toDateString() ? true : false;
+    return today.toDateString() === d.toDateString();
   }
 
   getDateValue(date: any) {
