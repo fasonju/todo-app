@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, ChangeDetectionStrategy, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Task} from 'src/app/Models/Task';
 
@@ -20,7 +20,7 @@ export class TaskEditModalComponent implements OnChanges {
         text: new FormControl('')
     });
 
-    ngOnChanges(changes:SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges) {
         if (changes['task']) {
             this.taskForm.patchValue({
                 name: this.task.name,

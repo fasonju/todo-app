@@ -1,8 +1,9 @@
-use crate::diesel::{Insertable, Queryable};
-use crate::schema::tasks;
 use diesel::{AsChangeset, Identifiable};
 /// Sqlite cannot store dates so we store as iso string
 use serde::{Deserialize, Serialize};
+
+use crate::diesel::{Insertable, Queryable};
+use crate::schema::tasks;
 
 #[derive(Queryable, Serialize, Deserialize, AsChangeset, Identifiable)]
 #[allow(non_snake_case)]

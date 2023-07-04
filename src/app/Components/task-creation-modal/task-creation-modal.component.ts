@@ -14,15 +14,14 @@ export class TaskCreationModalComponent {
         dueDate: new FormControl(new Date().toISOString().slice(0, 10)),
         text: new FormControl('')
     });
+    @Output() createTask: EventEmitter<InsertTask> = new EventEmitter();
+    @Output() closeModal: EventEmitter<void> = new EventEmitter();
 
     updateDueDate(date: string) {
         this.taskForm.patchValue({
             dueDate: date
         })
     }
-
-    @Output() createTask: EventEmitter<InsertTask> = new EventEmitter();
-    @Output() closeModal: EventEmitter<void> = new EventEmitter();
 
     onCreateTask() {
         let newTask: InsertTask = {

@@ -8,11 +8,13 @@ import {TasksService} from "../../tasks.service";
     styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-    constructor(private taskService: TasksService) {
-    }
     @Input() task!: Task;
     @Output() openEditTaskModal = new EventEmitter<Task>();
     completed = false;
+
+    constructor(private taskService: TasksService) {
+    }
+
     ngOnInit() {
         this.completed = this.task.completed;
     }
@@ -26,8 +28,8 @@ export class TaskComponent implements OnInit {
         this.taskService.editTask(this.task).then((updatedTask) => {
             this.task = updatedTask;
         })
-        .catch((err) => {
-            alert(err);
-        });
+            .catch((err) => {
+                alert(err);
+            });
     }
 }

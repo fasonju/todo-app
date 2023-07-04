@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import {invoke} from "@tauri-apps/api/tauri";
 
 @Component({
     selector: "app-root",

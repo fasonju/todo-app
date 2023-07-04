@@ -8,14 +8,14 @@ import {TasksService} from 'src/app/tasks.service';
     styleUrls: ['./day.component.css']
 })
 export class DayComponent implements OnInit {
-    constructor(private tasksService: TasksService) {
-    }
-
     date: string = new Date().toISOString().slice(0, 10);
     tasks: Task[] = [];
     creationModalActive = false;
     //this defines the task that the modal will edit
     taskToEdit?: Task = undefined;
+
+    constructor(private tasksService: TasksService) {
+    }
 
     ngOnInit(): void {
         this.tasksService.getTasksForDay(this.date).then(tasks => {
