@@ -43,3 +43,4 @@ Thumbs.db
 
 # tauri
 /src-tauri/target/*
+/src-tauri/db.sqlite3
