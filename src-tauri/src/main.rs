@@ -23,7 +23,6 @@ fn main() {
     let conn = &mut db::establish_connection();
     conn.run_pending_migrations(MIGRATIONS)
         .expect("Error running migrations");
-    println!("Migrations ran successfully");
 
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![

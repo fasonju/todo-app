@@ -59,10 +59,14 @@ export class DayComponent implements OnInit {
     }
 
     editTask(task: Task): void {
-        this.tasksService.editTask(task).then((task) => {
-            let index = this.tasks.findIndex((t) => t.id == task.id);
+        this.tasksService.editTask(task).then((updatedTask) => {
+            let index = this.tasks.findIndex((t) => t.id == updatedTask.id);
             if (index != -1) {
                 this.tasks[index] = task;
+            }
+
+            if (updatedTask.dueDate != this.date) {
+                this.tasks = this.tasks.filter((t) => t.id != updatedTask.id);
             }
         })
             .catch(err => {
