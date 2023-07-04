@@ -2,6 +2,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 extern crate diesel;
+#[macro_use]
 
 mod db;
 mod queries;
@@ -13,9 +14,17 @@ mod models {
 
 mod schema;
 
+use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 use queries::*;
 
+pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("./migrations/");
+
 fn main() {
+    let conn = &mut db::establish_connection();
+    conn.run_pending_migrations(MIGRATIONS)
+        .expect("Error running migrations");
+    println!("Migrations ran successfully");
+
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             save_task,
