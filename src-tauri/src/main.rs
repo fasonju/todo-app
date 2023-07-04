@@ -17,7 +17,11 @@ use queries::*;
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![save_task, get_tasks_for_day])
+        .invoke_handler(tauri::generate_handler![
+            save_task,
+            get_tasks_for_day,
+            edit_task
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

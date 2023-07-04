@@ -9,7 +9,7 @@ export class TasksService {
 
     /**
      *
-     * @param day day in iso string format
+     * @param date the date to get tasks for in iso format
      */
     getTasksForDay(date: string): Promise<Task[]> {
         return invoke<Task[]>('get_tasks_for_day', {isoDate: date});
@@ -18,6 +18,10 @@ export class TasksService {
 
     saveTask(task: InsertTask): Promise<Task> {
         return invoke<Task>('save_task', {task: task});
+    }
+
+    editTask(task: Task): Promise<Task> {
+        return invoke<Task>('edit_task', {task: task});
     }
 
     constructor() {

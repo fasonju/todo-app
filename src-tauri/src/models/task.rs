@@ -1,12 +1,13 @@
 use crate::diesel::{Insertable, Queryable};
 use crate::schema::tasks;
+use diesel::{AsChangeset, Identifiable};
 /// Sqlite cannot store dates so we store as iso string
 use serde::{Deserialize, Serialize};
 
-#[derive(Queryable, Serialize, Deserialize)]
+#[derive(Queryable, Serialize, Deserialize, AsChangeset, Identifiable)]
 #[allow(non_snake_case)]
 pub struct Task {
-    pub(crate) id: i32,
+    pub id: i32,
     name: String,
     dueDate: String,
     completed: bool,

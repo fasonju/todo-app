@@ -47,13 +47,13 @@ pub fn save_task(task: InsertTask) -> TauriResult<Task> {
 }
 
 #[tauri::command]
-#[alow(non_snake_case)]
+#[allow(non_snake_case)]
 pub fn edit_task(task: Task) -> TauriResult<Task> {
     let conn = &mut establish_connection();
 
-    let task = diesel::update(tasks::table.find(task.id))
+    diesel::update(tasks::table.filter(tasks::id.eq(task.id)))
         .set(&task)
-        .get_result(conn)
+        .execute(conn)
         .map_err(TauriError::from)?;
 
     Ok(task)

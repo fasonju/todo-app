@@ -59,8 +59,15 @@ export class DayComponent implements OnInit {
     }
 
     editTask(task: Task): void {
-        console.log(task);
-        this.closeEditModal();
+        this.tasksService.editTask(task).then((task) => {
+            let index = this.tasks.findIndex((t) => t.id == task.id);
+            if (index != -1) {
+                this.tasks[index] = task;
+            }
+        })
+            .catch(err => {
+                alert(err);
+            });
     }
 
     /**
