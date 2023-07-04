@@ -15,7 +15,7 @@ export class TaskEditModalComponent implements OnChanges {
 
     taskForm: FormGroup = new FormGroup({
         name: new FormControl(''),
-        dueDate: new FormControl(''),
+        dueDate: new FormControl(new Date().toISOString().slice(0, 10)),
         complete: new FormControl(''),
         text: new FormControl('')
     });

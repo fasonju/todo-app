@@ -11,7 +11,7 @@ export class TaskCreationModalComponent {
 
     taskForm: FormGroup = new FormGroup({
         name: new FormControl(''),
-        dueDate: new FormControl(''),
+        dueDate: new FormControl(new Date().toISOString().slice(0, 10)),
         text: new FormControl('')
     });
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {InsertTask, Task} from 'src/app/Models/Task';
 import {TasksService} from 'src/app/tasks.service';
 
@@ -81,6 +81,4 @@ export class DayComponent implements OnInit {
             this.tasks = tasks;
         });
     }
-
-    protected readonly undefined = undefined;
 }
