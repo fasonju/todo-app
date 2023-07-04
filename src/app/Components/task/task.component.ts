@@ -8,9 +8,9 @@ import {Task} from 'src/app/Models/Task';
 })
 export class TaskComponent {
     @Input() task!: Task;
-    @Output() onEditTask = new EventEmitter<void>();
+    @Output() openEditTaskModal = new EventEmitter<Task>();
 
-    editTask(): void {
-        this.onEditTask.emit();
+    onEditTask(): void {
+        this.openEditTaskModal.emit(this.task);
     }
 }

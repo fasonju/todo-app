@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {InsertTask, Task} from 'src/app/Models/Task';
 import {TasksService} from 'src/app/tasks.service';
 
@@ -7,13 +7,15 @@ import {TasksService} from 'src/app/tasks.service';
     templateUrl: './day.component.html',
     styleUrls: ['./day.component.css']
 })
-export class DayComponent {
+export class DayComponent implements OnInit {
     constructor(private tasksService: TasksService) {
     }
 
     date: string = new Date().toISOString().slice(0, 10);
     tasks: Task[] = [];
     creationModalActive = false;
+    //this defines the task that the modal will edit
+    taskToEdit?: Task = undefined;
 
     ngOnInit(): void {
         this.tasksService.getTasksForDay(this.date).then(tasks => {
@@ -32,6 +34,15 @@ export class DayComponent {
         this.creationModalActive = false;
     }
 
+    openEditModal(task: Task): void {
+        this.taskToEdit = task;
+        console.log(this.taskToEdit);
+    }
+
+    closeEditModal(): void {
+        this.taskToEdit = undefined;
+    }
+
     /**
      *
      * @param insert_task the values are not checked yet this is done on the back end
@@ -47,6 +58,11 @@ export class DayComponent {
             });
     }
 
+    editTask(task: Task): void {
+        console.log(task);
+        this.closeEditModal();
+    }
+
     /**
      * This function updates the tasks array to the tasks for the given date.
      *
@@ -57,13 +73,5 @@ export class DayComponent {
         this.tasksService.getTasksForDay(this.date).then(tasks => {
             this.tasks = tasks;
         });
-    }
-
-    editTask(task: Task): void {
-        //TODO spawn modal for changes to task
-    }
-
-    applyTaskChanges(task: Task): void {
-        // send message to backend to update task
     }
 }

@@ -9,11 +9,17 @@
 <ul class="flex-wrap">
     <li
             *ngFor="let task of tasks;">
-        <app-task [task]="task" (onEditTask)="editTask(task)"></app-task>
+        <app-task [task]="task" (openEditTaskModal)="openEditModal($event)"></app-task>
     </li>
 </ul>
 <!-- applies blur to background of modal-->
-<div *ngIf="creationModalActive" class="fixed top-0 left-0 w-full h-full opacity-50 bg-slate-500"></div>
+<div *ngIf="creationModalActive || taskToEdit != undefined"
+     class="fixed top-0 left-0 w-full h-full opacity-50 bg-slate-500"></div>
 <app-task-creation-modal *ngIf="creationModalActive" (createTask)="saveTask($event)" (closeModal)="closeCreationModal()"
                          class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></app-task-creation-modal>
+<div *ngIf="taskToEdit != undefined">
+    <app-task-edit-modal (editTask)="editTask($event)" (closeModal)="closeEditModal()" [task]="taskToEdit!"
+                         class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></app-task-edit-modal>
+</div>
+
 

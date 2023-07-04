@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ChangeDetectionStrategy, OnChanges, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Task} from 'src/app/Models/Task';
 
@@ -7,18 +7,29 @@ import {Task} from 'src/app/Models/Task';
     templateUrl: './task-edit-modal.component.html',
     styleUrls: ['./task-edit-modal.component.css']
 })
-export class TaskEditModalComponent {
+export class TaskEditModalComponent implements OnChanges {
     @Input() task!: Task;
     @Output() editTask: EventEmitter<Task> = new EventEmitter();
     @Output() closeModal: EventEmitter<void> = new EventEmitter();
 
 
     taskForm: FormGroup = new FormGroup({
-        name: new FormControl(this.task.name),
-        dueDate: new FormControl(this.task.dueDate),
-        complete: new FormControl(this.task.completed),
-        text: new FormControl(this.task.text)
+        name: new FormControl(''),
+        dueDate: new FormControl(''),
+        complete: new FormControl(''),
+        text: new FormControl('')
     });
+
+    ngOnChanges(changes:SimpleChanges) {
+        if (changes['task']) {
+            this.taskForm.patchValue({
+                name: this.task.name,
+                dueDate: this.task.dueDate,
+                complete: this.task.completed,
+                text: this.task.text
+            });
+        }
+    }
 
     onUpdateTask() {
         let updatedTask: Task = {
@@ -33,7 +44,13 @@ export class TaskEditModalComponent {
         this.closeModal.emit();
     }
 
-    oncloseModal() {
+    updateDueDate(date: string) {
+        this.taskForm.patchValue({
+            dueDate: date
+        })
+    }
+
+    onCloseModal() {
         this.closeModal.emit();
     }
 }
