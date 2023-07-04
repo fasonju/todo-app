@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Queryable, Serialize, Deserialize)]
 #[allow(non_snake_case)]
 pub struct Task {
-    id: i32,
+    pub(crate) id: i32,
     name: String,
     dueDate: String,
     completed: bool,

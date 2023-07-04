@@ -74,4 +74,6 @@ export class DayComponent implements OnInit {
             this.tasks = tasks;
         });
     }
+
+    protected readonly undefined = undefined;
 }

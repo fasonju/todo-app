@@ -46,6 +46,19 @@ pub fn save_task(task: InsertTask) -> TauriResult<Task> {
         .map_err(TauriError::from)
 }
 
+#[tauri::command]
+#[alow(non_snake_case)]
+pub fn edit_task(task: Task) -> TauriResult<Task> {
+    let conn = &mut establish_connection();
+
+    let task = diesel::update(tasks::table.find(task.id))
+        .set(&task)
+        .get_result(conn)
+        .map_err(TauriError::from)?;
+
+    Ok(task)
+}
+
 fn valid_date(date: &str) -> bool {
     chrono::NaiveDate::parse_from_str(date, "%Y-%m-%d").is_ok()
 }
