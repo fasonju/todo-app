@@ -29,7 +29,8 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             save_task,
             get_tasks_for_day,
-            edit_task
+            edit_task,
+            delete_task
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

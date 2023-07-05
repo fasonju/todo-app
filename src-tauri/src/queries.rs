@@ -52,6 +52,17 @@ pub fn edit_task(task: Task) -> TauriResult<Task> {
     Ok(task)
 }
 
+#[tauri::command]
+#[allow(non_snake_case)]
+pub fn delete_task(task: Task) -> TauriResult<Task> {
+    let conn = &mut establish_connection();
+
+    diesel::delete(tasks::table.filter(tasks::id.eq(task.id)))
+        .execute(conn)
+        .map_err(TauriError::from)?;
+    Ok(task)
+}
+
 /// returns Err if the date is invalid
 fn validate_date(date: String) -> TauriResult<()> {
     if chrono::NaiveDate::parse_from_str(date.as_str(), "%Y-%m-%d").is_err() {
