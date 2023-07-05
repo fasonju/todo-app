@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Task} from 'src/app/Models/Task';
+import {TasksService} from "../../tasks.service";
 
 @Component({
     selector: 'app-task-edit-modal',
@@ -12,6 +13,8 @@ export class TaskEditModalComponent implements OnChanges {
     @Output() editTask: EventEmitter<Task> = new EventEmitter();
     @Output() closeModal: EventEmitter<void> = new EventEmitter();
 
+    constructor(private tasksSerice : TasksService) {
+    }
 
     taskForm: FormGroup = new FormGroup({
         name: new FormControl(''),
@@ -40,7 +43,13 @@ export class TaskEditModalComponent implements OnChanges {
             text: this.taskForm.value.text
         }
 
-        this.editTask.emit(updatedTask);
+        this.tasksSerice.editTask(updatedTask).then((task) => {
+            this.editTask.emit(task);
+        })
+            .catch((err) => {
+                alert(err);
+            })
+
         this.closeModal.emit();
     }
 

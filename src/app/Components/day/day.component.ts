@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {InsertTask, Task} from 'src/app/Models/Task';
+import {Task} from 'src/app/Models/Task';
 import {TasksService} from 'src/app/tasks.service';
 
 @Component({
@@ -53,20 +53,24 @@ export class DayComponent implements OnInit {
         }
     }
 
-    editTask(task: Task): void {
-        this.tasksService.editTask(task).then((updatedTask) => {
-            let index = this.tasks.findIndex((t) => t.id == updatedTask.id);
-            if (index != -1) {
-                this.tasks[index] = task;
-            }
+    /**
+     *
+     * @param editedTask task is edited inside the modal
+     * and gets passed from the child to check if it should be removed from tasks
+     */
+    editTask(editedTask: Task): void {
+        //the position of the changed task in tasks
+        let index = this.tasks.findIndex((t) => t.id == editedTask.id);
+        if (index == -1) {
+            alert("error: edited task not found.")
+            return;
+        }
+        this.tasks[index] = editedTask;
 
-            if (updatedTask.dueDate != this.date) {
-                this.tasks = this.tasks.filter((t) => t.id != updatedTask.id);
-            }
-        })
-            .catch(err => {
-                alert(err);
-            });
+
+        if (editedTask.dueDate != this.date) {
+            this.tasks = this.tasks.filter((t) => t.id != editedTask.id);
+        }
     }
 
     /**
