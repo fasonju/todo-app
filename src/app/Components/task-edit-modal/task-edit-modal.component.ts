@@ -12,6 +12,7 @@ export class TaskEditModalComponent implements OnChanges {
     @Input() task!: Task;
     @Output() editTask: EventEmitter<Task> = new EventEmitter();
     @Output() closeModal: EventEmitter<void> = new EventEmitter();
+    @Output() deleteTask: EventEmitter<Task> = new EventEmitter()
 
     constructor(private tasksSerice : TasksService) {
     }
@@ -51,6 +52,16 @@ export class TaskEditModalComponent implements OnChanges {
             })
 
         this.closeModal.emit();
+    }
+
+    onDeleteTask() {
+        this.tasksSerice.deleteTask(this.task).then((task) => {
+            this.deleteTask.emit(this.task)
+        })
+            .catch((err) => {
+                alert(err);
+            });
+        this.closeModal.emit()
     }
 
     updateDueDate(date: string) {

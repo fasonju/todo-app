@@ -25,4 +25,8 @@ export class TasksService {
     editTask(task: Task): Promise<Task> {
         return invoke<Task>('edit_task', {task: task});
     }
+
+    deleteTask(task: Task): Promise<Task> {
+        return invoke<Task>('delete_task', {task: task});
+    }
 }
