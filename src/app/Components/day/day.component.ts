@@ -45,17 +45,12 @@ export class DayComponent implements OnInit {
 
     /**
      *
-     * @param insert_task the values are not checked yet this is done on the back end
+     * @param task The new task created check if it should be added to tasks
      */
-    saveTask(insert_task: InsertTask): void {
-        this.tasksService.saveTask(insert_task).then((task) => {
-            if (task.dueDate == this.date) {
-                this.tasks.push(task);
-            }
-        })
-            .catch(err => {
-                alert(err);
-            });
+    newTask(task: Task): void {
+        if (task.dueDate == this.date) {
+            this.tasks.push(task);
+        }
     }
 
     editTask(task: Task): void {

@@ -15,7 +15,7 @@
 <!-- applies blur to background of modal-->
 <div *ngIf="creationModalActive || taskToEdit != undefined"
      class="fixed top-0 left-0 w-full h-full opacity-50 bg-slate-500"></div>
-<app-task-creation-modal (closeModal)="closeCreationModal()" (createTask)="saveTask($event)" *ngIf="creationModalActive"
+<app-task-creation-modal (closeModal)="closeCreationModal()" (createTask)="newTask($event)" *ngIf="creationModalActive"
                          class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></app-task-creation-modal>
 <app-task-edit-modal (closeModal)="closeEditModal()" (editTask)="editTask($event)" *ngIf="taskToEdit != undefined"
                      [task]="taskToEdit!"
