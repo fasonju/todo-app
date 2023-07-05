@@ -60,16 +60,27 @@ export class DayComponent implements OnInit {
      */
     editTask(editedTask: Task): void {
         //the position of the changed task in tasks
-        let index = this.tasks.findIndex((t) => t.id == editedTask.id);
+        let index = this.findTaskIndex(editedTask);
         if (index == -1) {
             alert("error: edited task not found.")
             return;
         }
         this.tasks[index] = editedTask;
 
-
         if (editedTask.dueDate != this.date) {
             this.tasks = this.tasks.filter((t) => t.id != editedTask.id);
+        }
+    }
+
+    /**
+     * Delete the task out of the tasks array
+     * @param deletedTask The task to be deleted.
+     */
+    deleteTask(deletedTask: Task) {
+        let originalLength = this.tasks.length;
+        this.tasks.filter((t) => t.id != deletedTask.id)
+        if (this.tasks.length == originalLength) {
+            alert("error: no deletion occurred on front end.")
         }
     }
 
@@ -83,5 +94,15 @@ export class DayComponent implements OnInit {
         this.tasksService.getTasksForDay(this.date).then(tasks => {
             this.tasks = tasks;
         });
+    }
+
+    /**
+     *
+     * @param task the task to find
+     * @private helper function not used outside of this component.
+     * @return Returns the index and -1 if it does not exist.
+     */
+    private findTaskIndex(task: Task) {
+        return this.tasks.findIndex((t) => t.id == task.id);
     }
 }
