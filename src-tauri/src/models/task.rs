@@ -10,7 +10,7 @@ use crate::schema::tasks;
 pub struct Task {
     pub id: i32,
     name: String,
-    dueDate: String,
+    pub(crate) dueDate: String,
     completed: bool,
     text: String,
 }
