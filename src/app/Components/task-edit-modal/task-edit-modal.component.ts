@@ -61,7 +61,8 @@ export class TaskEditModalComponent implements OnChanges {
             .catch((err) => {
                 alert(err);
             });
-        this.closeModal.emit()
+        this.deleteTask.emit(this.task);
+        this.closeModal.emit();
     }
 
     updateDueDate(date: string) {

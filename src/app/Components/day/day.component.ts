@@ -78,7 +78,7 @@ export class DayComponent implements OnInit {
      */
     deleteTask(deletedTask: Task) {
         let originalLength = this.tasks.length;
-        this.tasks.filter((t) => t.id != deletedTask.id)
+        this.tasks = this.tasks.filter((t) => t.id != deletedTask.id)
         if (this.tasks.length == originalLength) {
             alert("error: no deletion occurred on front end.")
         }
