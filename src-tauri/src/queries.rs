@@ -56,7 +56,6 @@ pub fn edit_task(task: Task) -> TauriResult<Task> {
 #[allow(non_snake_case)]
 pub fn delete_task(task: Task) -> TauriResult<Task> {
     let conn = &mut establish_connection();
-
     diesel::delete(tasks::table.filter(tasks::id.eq(task.id)))
         .execute(conn)
         .map_err(TauriError::from)?;

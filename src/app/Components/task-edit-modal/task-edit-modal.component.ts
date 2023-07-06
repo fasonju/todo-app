@@ -13,16 +13,15 @@ export class TaskEditModalComponent implements OnChanges {
     @Output() editTask: EventEmitter<Task> = new EventEmitter();
     @Output() closeModal: EventEmitter<void> = new EventEmitter();
     @Output() deleteTask: EventEmitter<Task> = new EventEmitter()
-
-    constructor(private tasksSerice : TasksService) {
-    }
-
     taskForm: FormGroup = new FormGroup({
         name: new FormControl(''),
         dueDate: new FormControl(new Date().toISOString().slice(0, 10)),
         complete: new FormControl(''),
         text: new FormControl('')
     });
+
+    constructor(private tasksSerice: TasksService) {
+    }
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes['task']) {

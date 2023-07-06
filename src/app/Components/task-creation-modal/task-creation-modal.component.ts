@@ -9,8 +9,6 @@ import {TasksService} from "../../tasks.service";
     styleUrls: ['./task-creation-modal.component.css']
 })
 export class TaskCreationModalComponent {
-constructor(private tasksService : TasksService) {
-}
     taskForm: FormGroup = new FormGroup({
         name: new FormControl(''),
         dueDate: new FormControl(new Date().toISOString().slice(0, 10)),
@@ -18,6 +16,9 @@ constructor(private tasksService : TasksService) {
     });
     @Output() createTask: EventEmitter<Task> = new EventEmitter();
     @Output() closeModal: EventEmitter<void> = new EventEmitter();
+
+    constructor(private tasksService: TasksService) {
+    }
 
     updateDueDate(date: string) {
         this.taskForm.patchValue({
@@ -38,9 +39,9 @@ constructor(private tasksService : TasksService) {
             this.closeModal.emit();
             this.taskForm.reset();
         })
-            .catch( (err)=> {
-            alert(err);
-        });
+            .catch((err) => {
+                alert(err);
+            });
 
 
     }
